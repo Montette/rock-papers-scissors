@@ -1,3 +1,32 @@
 .container {
-    padding-bottom: 15px
+    padding-bottom: 20px
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+/*   left:40%;*/
+    top: 20%;
+}
+
+.playerPick,
+.computerPick{
+    position: relative;
+    height: 150px;
+    margin-top: 20px;
+}
+
+.playerPick > img {
+    left: 83%;
+}
+
+.computerPick > img {
+    right: 83%;
+}
+
+.result {
+    font-size: 3rem;
+    color: red;
+    font-weight: bold;
 }
