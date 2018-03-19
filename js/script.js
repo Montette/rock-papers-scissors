@@ -13,7 +13,9 @@ var gameState = 'notStarted', //started // ended
 
 var newGameElem = document.getElementById('js-newGameElement'),
     pickElem = document.getElementById('js-playerPickElement'),
-    resultsElem = document.getElementById('js-resultsTableElement');
+    resultsElem = document.getElementById('js-resultsTableElement'),
+resultPhoto = document.getElementById('resultPhoto'),
+    resultItems = document.getElementById('result');
 
 var pickRock = document.getElementById('js-playerPick_rock'),
     pickPaper = document.getElementById('js-playerPick_paper'),
@@ -31,30 +33,21 @@ var playerPickElem = document.getElementById('js-playerPick'),
 pickRock.addEventListener('click', function () {
     var imgHand = document.createElement("img");
     imgHand.setAttribute("src", "img/hands/rockLeft.png");
-    while (playerPickElem.firstChild) {
-    playerPickElem.removeChild(playerPickElem.firstChild);
-}
-//    playerPickElem.removeChild(imgHand);
+    removeChild(playerPickElem);
     playerPickElem.appendChild(imgHand);
     playerPick('rock')
 });
 pickPaper.addEventListener('click', function () {
     var imgHand = document.createElement("img");
     imgHand.setAttribute("src", "img/hands/paperLeft.png");
-     while (playerPickElem.firstChild) {
-    playerPickElem.removeChild(playerPickElem.firstChild);
-     }
-//     playerPickElem.removeChild(imgHand);
+     removeChild(playerPickElem);
     playerPickElem.appendChild(imgHand);
     playerPick('paper')
 });
 pickScissors.addEventListener('click', function () {
     var imgHand = document.createElement("img");
     imgHand.setAttribute("src", "img/hands/scissorsLeft.png");
-     while (playerPickElem.firstChild) {
-    playerPickElem.removeChild(playerPickElem.firstChild);
-     }
-//    playerPickElem.removeChild(imgHand);
+    removeChild(playerPickElem);
     playerPickElem.appendChild(imgHand);
     playerPick('scissors')
 });
@@ -66,15 +59,30 @@ function setGameElements() {
             newGameElem.style.display = 'none';
             pickElem.style.display = 'block';
             resultsElem.style.display = 'block';
+            resultItems.style.display = 'block';
+            console.log(gameState + " started?")
             break;
         case 'ended':
             resetGame();
-            newGameBtn.innerText = 'Jeszcze raz';           
-        case 'notStarted':
+            newGameBtn.innerText = 'Jeszcze raz';
+            newGameElem.style.display = 'block';
+             pickElem.style.display = 'none';
+            resultItems.style.display = 'none';
+            resultsElem.style.display = 'block';
+            console.log(gameState + " end?")
+            break;
+           case 'notStarted':
+            newGameElem.style.display = 'block';
+            pickElem.style.display = 'none';
+            resultsElem.style.display = 'none';
+            
+            console.log(gameState + " notstarted/?")
+            break;
         default:
             newGameElem.style.display = 'block';
             pickElem.style.display = 'none';
             resultsElem.style.display = 'none';
+            console.log(gameState + " default/?")
     }
 }
 
@@ -83,6 +91,7 @@ setGameElements();
 
 
 function newGame() {
+   removeChild(resultPhoto);
     player.name = prompt('Please enter your name', 'imię gracza');
     if (player.name) {
         player.score = 0;
@@ -96,15 +105,6 @@ function newGame() {
 
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
-    
-//    var img = document.createElement("img");
-//    img.setAttribute("src", "rockLeft.png");
-    
-//    playerPickElem.appendChild(leftRock);
-
-//    playerPickElem.innerHTML = playerPick;
-//    computerPickElem.innerHTML = computerPick;
-
     checkRoundWinner(playerPick, computerPick);
     setGamePoints();
 }
@@ -127,10 +127,7 @@ function getComputerPick() {
     break;
     }
         
-     while (computerPickElem.firstChild) {
-    computerPickElem.removeChild(computerPickElem.firstChild);
-     }
-//     playerPickElem.removeChild(imgHand);
+     removeChild(computerPickElem);
     computerPickElem.appendChild(imgHand);
     
     return computerPick;
@@ -167,16 +164,25 @@ function checkRoundWinner(playerPick, computerPick) {
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
-     if(player.score == 10){
-        alert("The winner is " + player.name + "!");
+     if(player.score == 1){
+        
+         var winnerPhoto =  "img/ls.jpg";
+         var winnerText = "Player won!";
         gameState = 'ended';
+         setPhoto(winnerPhoto, winnerText);
         setGameElements();
-    }else if (computer.score == 10){
-        alert("The winner is Computer!");
+    }else if (computer.score == 1){
+        
+         var winnerPhoto =  "img/pc.jpg";
+         var winnerText = "Computer won!";
         gameState = 'ended';
+        setPhoto(winnerPhoto, winnerText);
         setGameElements();
     }
+    
 }
+
+
 
 function resetGame() {
     playerPickElem.innerHTML = "Player Selection";
@@ -184,3 +190,20 @@ function resetGame() {
 	playerResultElem.innerHTML = "";
     computerResultElem.innerHTML = "";   
 }
+
+
+
+function setPhoto(winnerPhoto, winnerText) {   
+        var imgResult = document.createElement("img");
+         imgResult.setAttribute("src", winnerPhoto)
+      resultPhoto.appendChild(imgResult);
+        var textResult = document.createElement("p");
+        textResult.innerHTML = winnerText;
+      resultPhoto.appendChild(textResult);        
+}
+
+
+ function removeChild(childEl) {
+     while (childEl.firstChild) {
+    childEl.removeChild(childEl.firstChild);
+     }};
