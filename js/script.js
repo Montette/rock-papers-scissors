@@ -14,7 +14,7 @@ var gameState = 'notStarted', //started // ended
 var newGameElem = document.getElementById('js-newGameElement'),
     pickElem = document.getElementById('js-playerPickElement'),
     resultsElem = document.getElementById('js-resultsTableElement'),
-resultPhoto = document.getElementById('resultPhoto'),
+    resultPhoto = document.getElementById('resultPhoto'),
     resultItems = document.getElementById('result');
 
 var pickRock = document.getElementById('js-playerPick_rock'),
@@ -40,7 +40,7 @@ pickRock.addEventListener('click', function () {
 pickPaper.addEventListener('click', function () {
     var imgHand = document.createElement("img");
     imgHand.setAttribute("src", "img/hands/paperLeft.png");
-     removeChild(playerPickElem);
+    removeChild(playerPickElem);
     playerPickElem.appendChild(imgHand);
     playerPick('paper')
 });
@@ -66,16 +66,16 @@ function setGameElements() {
             resetGame();
             newGameBtn.innerText = 'Jeszcze raz';
             newGameElem.style.display = 'block';
-             pickElem.style.display = 'none';
+            pickElem.style.display = 'none';
             resultItems.style.display = 'none';
             resultsElem.style.display = 'block';
             console.log(gameState + " end?")
             break;
-           case 'notStarted':
+        case 'notStarted':
             newGameElem.style.display = 'block';
             pickElem.style.display = 'none';
             resultsElem.style.display = 'none';
-            
+
             console.log(gameState + " notstarted/?")
             break;
         default:
@@ -89,9 +89,8 @@ function setGameElements() {
 setGameElements();
 
 
-
 function newGame() {
-   removeChild(resultPhoto);
+    removeChild(resultPhoto);
     player.name = prompt('Please enter your name', 'imię gracza');
     if (player.name) {
         player.score = 0;
@@ -111,28 +110,26 @@ function playerPick(playerPick) {
 
 function getComputerPick() {
     var possiblePicks = ['rock', 'paper', 'scissors'];
-    var computerPick =  possiblePicks[Math.floor(Math.random() * 3)];
-    
+    var computerPick = possiblePicks[Math.floor(Math.random() * 3)];
+
     var imgHand = document.createElement("img");
-    
-    switch (computerPick){
-        case 'paper': 
-    imgHand.setAttribute("src", "img/hands/paperRight.png");
-    break;
+
+    switch (computerPick) {
+        case 'paper':
+            imgHand.setAttribute("src", "img/hands/paperRight.png");
+            break;
         case 'rock':
-    imgHand.setAttribute("src", "img/hands/rockRight.png");
-    break;
+            imgHand.setAttribute("src", "img/hands/rockRight.png");
+            break;
         case 'scissors':
-    imgHand.setAttribute("src", "img/hands/scissorsRight.png");
-    break;
+            imgHand.setAttribute("src", "img/hands/scissorsRight.png");
+            break;
     }
-        
-     removeChild(computerPickElem);
+
+    removeChild(computerPickElem);
     computerPickElem.appendChild(imgHand);
-    
+
     return computerPick;
-    
-    
 }
 
 function checkRoundWinner(playerPick, computerPick) {
@@ -164,46 +161,44 @@ function checkRoundWinner(playerPick, computerPick) {
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
-     if(player.score == 1){
-        
-         var winnerPhoto =  "img/happy.jpg";
-         var winnerText = "Player won!";
+    if (player.score == 10) {
+
+        var winnerPhoto = "img/happy.jpg";
+        var winnerText = "Player won!";
         gameState = 'ended';
-         setPhoto(winnerPhoto, winnerText);
+        setPhoto(winnerPhoto, winnerText);
         setGameElements();
-    }else if (computer.score == 1){
-        
-         var winnerPhoto =  "img/cute.jpg";
-         var winnerText = "Computer won!";
+    } else if (computer.score == 10) {
+
+        var winnerPhoto = "img/cute.jpg";
+        var winnerText = "Computer won!";
         gameState = 'ended';
         setPhoto(winnerPhoto, winnerText);
         setGameElements();
     }
-    
 }
-
-
 
 function resetGame() {
     playerPickElem.innerHTML = "Player Selection";
-	computerPickElem.innerHTML = "Computer Selection";
-	playerResultElem.innerHTML = "";
-    computerResultElem.innerHTML = "";   
+    computerPickElem.innerHTML = "Computer Selection";
+    playerResultElem.innerHTML = "";
+    computerResultElem.innerHTML = "";
 }
 
 
 
-function setPhoto(winnerPhoto, winnerText) {   
-        var imgResult = document.createElement("img");
-         imgResult.setAttribute("src", winnerPhoto)
-      resultPhoto.appendChild(imgResult);
-        var textResult = document.createElement("p");
-        textResult.innerHTML = winnerText;
-      resultPhoto.appendChild(textResult);        
+function setPhoto(winnerPhoto, winnerText) {
+    var imgResult = document.createElement("img");
+    imgResult.setAttribute("src", winnerPhoto)
+    resultPhoto.appendChild(imgResult);
+    var textResult = document.createElement("p");
+    textResult.innerHTML = winnerText;
+    resultPhoto.appendChild(textResult);
 }
 
 
- function removeChild(childEl) {
-     while (childEl.firstChild) {
-    childEl.removeChild(childEl.firstChild);
-     }};
+function removeChild(childEl) {
+    while (childEl.firstChild) {
+        childEl.removeChild(childEl.firstChild);
+    }
+};
