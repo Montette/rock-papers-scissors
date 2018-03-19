@@ -1,8 +1,24 @@
+body {
+    font-family: 'Oswald', sans-serif;
+    color: #4a4a4c;
+    font-size: 2rem;
+    background: linear-gradient(180deg, rgba(99,189,186,0.7371323529411764) 0%, rgba(255,255,255,0.8715861344537815) 76%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    
+}
 .container {
     padding-bottom: 20px
 }
 
-img {
+h3 {
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+.playerPick > img,
+.computerPick > img{
     height: 100px;
     width: 100px;
     position: absolute;
@@ -33,18 +49,42 @@ img {
 
 .resultPhoto {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .resultPhoto > img {
     height: 250px;
     width:290px;
-    margin-top: 100px;
+    margin-top: 15px;
 }
 
 .resultPhoto > p {
     font-size: 30px;
+    margin-top: 30px;
+    color: #e55f4e;
+}
+
+.gameTitle {
+    width: 25%;
     margin-top: 20px;
-    color: red;
+    margin-bottom: 20px;
+}
+
+.btn-default {
+    font-size: 2rem;;
+}
+
+.buttonPickRock:hover > .badge {
+   background-color:#f26651;
+}
+
+.buttonPickPaper:hover > .badge {
+   background-color:#63bdba;
+}
+
+.buttonPickScissors:hover > .badge {
+   background-color:#f6bd4a;
 }
 

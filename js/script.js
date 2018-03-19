@@ -166,14 +166,14 @@ function setGamePoints() {
     computerPointsElem.innerHTML = computer.score;
      if(player.score == 1){
         
-         var winnerPhoto =  "img/ls.jpg";
+         var winnerPhoto =  "img/happy.jpg";
          var winnerText = "Player won!";
         gameState = 'ended';
          setPhoto(winnerPhoto, winnerText);
         setGameElements();
     }else if (computer.score == 1){
         
-         var winnerPhoto =  "img/pc.jpg";
+         var winnerPhoto =  "img/cute.jpg";
          var winnerText = "Computer won!";
         gameState = 'ended';
         setPhoto(winnerPhoto, winnerText);
