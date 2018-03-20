@@ -89,19 +89,40 @@ function setGameElements() {
 setGameElements();
 
 
-function newGame() {
-    removeChild(resultPhoto);
-    player.name = prompt('Please enter your name', 'imię gracza');
-    if (player.name) {
-        player.score = 0;
-        computer.score = 0;
-        gameState = 'started';
-        setGameElements();
-        playerNameElem.innerHTML = player.name;
-        setGamePoints();
-    }
+function reset() {
+    $("#toggleCSS").attr("href", "css/alertify.core.css");
+    alertify.set({
+        labels: {
+            ok: "OK",
+            cancel: "Cancel"
+        },
+        delay: 5000,
+        buttonReverse: false,
+        buttonFocus: "ok"
+    });
 }
 
+
+
+function newGame() {
+    removeChild(resultPhoto);
+    reset();
+
+    alertify.prompt("Enter your name", function (e, str) {
+        if (e) {
+            player.name = str;
+            player.score = 0;
+            computer.score = 0;
+            gameState = 'started';
+            setGameElements();
+            playerNameElem.innerHTML = player.name;
+            setGamePoints();
+        } else {
+            return false;
+        }
+    }, );
+
+}
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
     checkRoundWinner(playerPick, computerPick);
